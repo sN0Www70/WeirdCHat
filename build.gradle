@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = 'https://maven.minecraftforge.net' }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:4.1+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+
+group = 'com.snow'
+version = '1.0'
+archivesBaseName = 'weirdchat'
+
+minecraft {
+    mappings channel: 'official', version: '1.16.5'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            mods {
+                weirdchat {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            mods {
+                weirdchat {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": "weirdchat",
+                "Specification-Version": "1.0",
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+        ])
+    }
+}
